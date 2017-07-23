@@ -1,8 +1,9 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick #widgets #core gui
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    #battlecity.cpp
 
 RESOURCES += qml.qrc
 
@@ -11,3 +12,6 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+HEADERS += \
+    #battlecity.h
