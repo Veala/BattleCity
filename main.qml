@@ -14,13 +14,8 @@ Window {
         focus: true
 
         Keys.onUpPressed: {
-            event.accepted = true
-//            if(event.isAutoRepeat === false) {
-//                console.log("event.isAutoRepeat === false")
-//                return
-//            }
             tank.rotation = 0
-            tank.y+=-1
+            tank.y+=-5
         }
         Keys.onDownPressed: {
             tank.rotation = 180
