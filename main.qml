@@ -11,25 +11,6 @@ Window {
         id: tank
         x: 400
         y:400
-        focus: true
-
-        Keys.onUpPressed: {
-            tank.rotation = 0
-            tank.y+=-5
-        }
-        Keys.onDownPressed: {
-            tank.rotation = 180
-            tank.y+=5
-        }
-        Keys.onLeftPressed: {
-            tank.rotation = -90
-            tank.x+=-5
-        }
-        Keys.onRightPressed: {
-            tank.rotation = 90
-            tank.x+=5
-        }
-
     }
 
 
