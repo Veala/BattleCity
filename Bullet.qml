@@ -20,7 +20,7 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        tank.shoot = false
+        tank.shoot = true
         rotation = tank.rotation
         if (rotation == 0) {
             x = tank.x + tank.width/3

@@ -3,8 +3,8 @@ import QtQuick.Window 2.2
 
 Window {
     visible: true
-    width: 800
-    height: 800
+    width: 768
+    height: 768
     color: "black"
 
     Tank {
