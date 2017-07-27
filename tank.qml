@@ -67,20 +67,23 @@ Item {
         interval: 20
         repeat: true
         onTriggered: {
-            if ((tank.x <= 0) || (tank.y <= 0) || (window.height <= tank.y+tank.height) || (window.width <= tank.x+tank.width)) return;
             if (rotation == 0) {
+                if (window.contains(Qt.point(tank.x+24,tank.y-4)) == false) return
                 if (window.childAt(tank.x+24,tank.y-4) != null) return
                 tank.y+=-4
             }
             else if (rotation == 180) {
+                if (window.contains(Qt.point(tank.x+24,tank.y+52)) == false) return
                 if (window.childAt(tank.x+24,tank.y+52) != null) return
                 tank.y+=4
             }
             else if (rotation == -90) {
+                if (window.contains(Qt.point(tank.x-4,tank.y+24)) == false) return
                 if (window.childAt(tank.x-4,tank.y+24) != null) return
                 tank.x+=-4
             }
             else if (rotation == 90) {
+                if (window.contains(Qt.point(tank.x+52,tank.y+24)) == false) return
                 if (window.childAt(tank.x+52,tank.y+24) != null) return
                 tank.x+=4
             }

@@ -16,7 +16,7 @@ Rectangle {
             else if (rotation == 180) bullet.y+=10
             else if (rotation == -90) bullet.x-=10
             else if (rotation == 90) bullet.x+=10
-            if ((bullet.x <= 0) || (bullet.y <= 0) || (bullet.parent.height <= bullet.y+bullet.height) || (bullet.parent.width <= bullet.x+bullet.width)) { tank.shoot = true; bullet.destroy() }
+            if ((bullet.x <= 0) || (bullet.y <= 0) || (window.height <= bullet.y+bullet.height) || (window.width <= bullet.x+bullet.width)) { tank.shoot = false; bullet.destroy() }
         }
     }
     Component.onCompleted: {
