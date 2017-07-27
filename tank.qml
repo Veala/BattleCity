@@ -66,52 +66,22 @@ Item {
         id: timer
         interval: 20
         repeat: true
-        property int x_Length: 0
-        property int y_Length: 0
         onTriggered: {
-            var item
+            if ((tank.x <= 0) || (tank.y <= 0) || (window.height <= tank.y+tank.height) || (window.width <= tank.x+tank.width)) return;
             if (rotation == 0) {
-                y_Length+=4
-                if (y_Length == 24) {
-                    item = window.childAt(tank.x+24,tank.y-4)
-                    if (item != null) {
-                        y_Length+=-4
-                        return
-                        //console.log(window.childAt(tank.x+24,tank.y-4).name)
-                    } else {
-                        y_Length=4
-                    }
-                }
+                if (window.childAt(tank.x+24,tank.y-4) != null) return
                 tank.y+=-4
             }
             else if (rotation == 180) {
-                y_Length+=4
-                if (y_Length == 24) {
-                    item = window.childAt(tank.x-24,tank.y+4)
-                    if (item != null) {
-                        y_Length+=-4
-                        return
-                        //console.log(window.childAt(tank.x+24,tank.y-4).name)
-                    } else {
-                        y_Length=4
-                    }
-                }
+                if (window.childAt(tank.x+24,tank.y+52) != null) return
                 tank.y+=4
             }
             else if (rotation == -90) {
-//                x_Length+=-4
-//                if (x_Length < 0) {
-//                    x_Length+=4
-//                    return
-//                }
+                if (window.childAt(tank.x-4,tank.y+24) != null) return
                 tank.x+=-4
             }
             else if (rotation == 90) {
-//                x_Length+=4
-//                if (x_Length > 24) {
-//                    x_Length+=-4
-//                    return
-//                }
+                if (window.childAt(tank.x+52,tank.y+24) != null) return
                 tank.x+=4
             }
         }
@@ -119,20 +89,11 @@ Item {
 
     Keys.onPressed: {
         if (event.isAutoRepeat == true) return;
-        var prevKey = currentKey
         currentKey = event.key
-        if (event.key == Qt.Key_Up) {
-            rotation = 0;
-            if (prevKey == Qt.Key_Down) timer.y_Length = 24 - timer.y_Length;
-            else if (prevKey != Qt.Key_Up) timer.y_Length=0;
-        }
-        else if (event.key == Qt.Key_Down) {
-            rotation = 180;
-            if (prevKey == Qt.Key_Up) timer.y_Length = 24 - timer.y_Length;
-            else if (prevKey != Qt.Key_Down) timer.y_Length=0;
-        }
-        else if (event.key == Qt.Key_Left) { rotation = -90; timer.x_Length=0; }
-        else if (event.key == Qt.Key_Right) { rotation = 90; timer.x_Length=24; }
+        if (event.key == Qt.Key_Up) { rotation = 0; }
+        else if (event.key == Qt.Key_Down) { rotation = 180; }
+        else if (event.key == Qt.Key_Left) { rotation = -90; }
+        else if (event.key == Qt.Key_Right) { rotation = 90; }
         if ((rotation == 0) || (rotation == 180)) { nCell = tank.x/24 + 0.5; tank.x = nCell*24 }
         else if ((rotation == 90) || (rotation == -90)) { nCell = tank.y/24 + 0.5; tank.y = nCell*24 }
         if(timer.running == true) return;
