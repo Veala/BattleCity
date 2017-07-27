@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     //bs.show();
     QQmlApplicationEngine engine;
     QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
+    //QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/BattleField.qml")));
     QObject *obj = component.create();
 
     //engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

@@ -3,5 +3,7 @@
         <file>main.qml</file>
         <file>Tank.qml</file>
         <file>Bullet.qml</file>
+        <file>Brick.qml</file>
+        <file>Armor.qml</file>
     </qresource>
 </RCC>
