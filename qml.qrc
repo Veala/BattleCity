@@ -5,5 +5,7 @@
         <file>Bullet.qml</file>
         <file>Brick.qml</file>
         <file>Armor.qml</file>
+        <file>BattleField.qml</file>
+        <file>Eagle.qml</file>
     </qresource>
 </RCC>

@@ -11,11 +11,6 @@ Item {
     property int nCell
     property string name: "tank"
 
-//    Rectangle {
-//        anchors.fill: parent
-//        color: "white"
-//    }
-
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
@@ -66,26 +61,24 @@ Item {
         id: timer
         interval: 20
         repeat: true
+        function checkZone(chX,chY) {
+            if (window.contains(Qt.point(tank.x+chX,tank.y+chY)) == false) return false
+            if (window.childAt(tank.x+chX,tank.y+chY) != null) return false
+            return true
+        }
+
         onTriggered: {
             if (rotation == 0) {
-                if (window.contains(Qt.point(tank.x+24,tank.y-4)) == false) return
-                if (window.childAt(tank.x+24,tank.y-4) != null) return
-                tank.y+=-4
+                if (checkZone(24, -4) == true) tank.y+=-4
             }
             else if (rotation == 180) {
-                if (window.contains(Qt.point(tank.x+24,tank.y+52)) == false) return
-                if (window.childAt(tank.x+24,tank.y+52) != null) return
-                tank.y+=4
+                if (checkZone(24, 52) == true) tank.y+=4
             }
             else if (rotation == -90) {
-                if (window.contains(Qt.point(tank.x-4,tank.y+24)) == false) return
-                if (window.childAt(tank.x-4,tank.y+24) != null) return
-                tank.x+=-4
+                if (checkZone(-4, 24) == true) tank.x+=-4
             }
             else if (rotation == 90) {
-                if (window.contains(Qt.point(tank.x+52,tank.y+24)) == false) return
-                if (window.childAt(tank.x+52,tank.y+24) != null) return
-                tank.x+=4
+                if (checkZone(52, 24) == true) tank.x+=4
             }
         }
     }
@@ -112,7 +105,7 @@ Item {
         if (shoot == true) return;
         var bulletComponent = Qt.createComponent("Bullet.qml")
         if(bulletComponent.status == Component.Ready)
-            bullet = bulletComponent.createObject(tank.parent)
+            bullet = bulletComponent.createObject(window)
     }
 
 }
