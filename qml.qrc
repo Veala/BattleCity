@@ -7,5 +7,6 @@
         <file>Armor.qml</file>
         <file>BattleField.qml</file>
         <file>Eagle.qml</file>
+        <file>EnemyTank.qml</file>
     </qresource>
 </RCC>

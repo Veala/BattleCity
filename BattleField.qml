@@ -9,6 +9,42 @@ Rectangle {
     Armor { x: 0; y: 336; }     Armor { x: 24; y: 336; }
     Armor { x: 576; y: 336; }   Armor { x: 600; y: 336; }
     Armor { x: 288; y: 144; }   Armor { x: 288; y: 168; }    Armor { x: 312; y: 144; }    Armor { x: 312; y: 168; }
+    property var enemyTank
+
+    Component.onCompleted: generateEnemy.start()
+
+    function createEnemy() {
+        console.log("data")
+        var enemyTankComponent = Qt.createComponent("EnemyTank.qml")
+        if(enemyTankComponent.status == Component.Ready) {
+            enemyTank = enemyTankComponent.createObject(window)
+            enemyTank.y=0
+            win.nCurrentEnemies+=1
+            if (win.enemyPosition == 1) {
+                enemyTank.x = 0
+                win.enemyPosition = 2
+            } else if (win.enemyPosition == 2) {
+                enemyTank.x = width/2 - enemyTank.width/2
+                win.enemyPosition = 3
+            } else if (win.enemyPosition == 3) {
+                enemyTank.x = width - enemyTank.width
+                win.enemyPosition = 1
+            }
+        }
+    }
+
+    Timer {
+        id: generateEnemy
+        repeat: true
+        interval: 2000
+        onTriggered: {
+            if ((win.nCurrentEnemies<5) && (win.nCurrentEnemies<win.enemies)) {
+                createEnemy()
+            } else {
+                return;
+            }
+        }
+    }
 
     NumberAnimation {
         id: y_anim
@@ -19,18 +55,17 @@ Rectangle {
 
     signal loss()
     onLoss: {
-        tank.focus=false
+        if (tank!=null) tank.focus=false
         y_anim.start()
         eagle1.state = "game over"
     }
     signal hit()
     onHit: {
-        parent.lives-=1
-        if (parent.lives<0) {
-            parent.lives+=1
+        win.lives-=1
+        if (win.lives<0) {
+            win.lives+=1
             tank.destroy()
             y_anim.start()
-            eagle1.state = "game over"
         } else {
             tank.x=192
             tank.y=576

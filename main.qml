@@ -10,6 +10,7 @@ Window {
     property int enemies: 20
     property int lives: 3
     property int nCurrentEnemies: 0
+    property int enemyPosition: 1
 
     BattleField {
         id: bf
@@ -24,4 +25,5 @@ Window {
         font.bold: true
         text: "Enemies: " + win.enemies + "\nLives: " + win.lives
     }
+
 }

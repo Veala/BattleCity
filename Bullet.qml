@@ -36,6 +36,7 @@ Rectangle {
                 } else if (childAtwindow.name == "eagle") {
                     window.loss()
                 } else if (childAtwindow.name == "bullet") {
+                    if (childAtwindow.bornFrom == "tank") tank.shoot = false;
                     childAtwindow.destroy()
                 }
                 if (bornFrom == "tank") tank.shoot = false;
