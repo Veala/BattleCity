@@ -1,12 +1,12 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
-        <file>Tank.qml</file>
-        <file>Bullet.qml</file>
-        <file>Brick.qml</file>
-        <file>Armor.qml</file>
-        <file>BattleField.qml</file>
-        <file>Eagle.qml</file>
-        <file>EnemyTank.qml</file>
+        <file>qml/Armor.qml</file>
+        <file>qml/BattleField.qml</file>
+        <file>qml/Brick.qml</file>
+        <file>qml/Bullet.qml</file>
+        <file>qml/Eagle.qml</file>
+        <file>qml/EnemyTank.qml</file>
+        <file>qml/main.qml</file>
+        <file>qml/Tank.qml</file>
     </qresource>
 </RCC>

@@ -14,7 +14,6 @@ Rectangle {
     Component.onCompleted: generateEnemy.start()
 
     function createEnemy() {
-        console.log("data")
         var enemyTankComponent = Qt.createComponent("EnemyTank.qml")
         if(enemyTankComponent.status == Component.Ready) {
             enemyTank = enemyTankComponent.createObject(window)
@@ -80,8 +79,6 @@ Rectangle {
             y_anim.start()
         }
     }
-
-
 
     //designer--------------------------------------------------------------
     Brick {
