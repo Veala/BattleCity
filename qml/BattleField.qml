@@ -54,7 +54,10 @@ Rectangle {
 
     signal loss()
     onLoss: {
-        if (tank!=null) tank.focus=false
+        if (tank!=null) {
+            tank.focus=false
+            tank.x_stop()
+        }
         y_anim.start()
         eagle1.state = "game over"
     }
@@ -68,6 +71,7 @@ Rectangle {
         } else {
             tank.x=192
             tank.y=576
+            tank.x_stop()
             tank.rotation=0
         }
     }
@@ -75,6 +79,7 @@ Rectangle {
     onCheckOnWin: {
         if ((win.enemies == 0) && (win.nCurrentEnemies == 0)) {
             tank.focus=false
+            tank.x_stop()
             text1.text = "You win!"
             y_anim.start()
         }

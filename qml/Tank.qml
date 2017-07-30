@@ -10,6 +10,8 @@ Item {
     property int nCell
     property string name: "tank"
 
+    function x_stop() { timer.stop() }
+
     Rectangle {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
