@@ -23,8 +23,32 @@ Rectangle {
         y_anim.start()
         eagle1.state = "game over"
     }
-//--------------------------------------------------------------
+    signal hit()
+    onHit: {
+        parent.lives-=1
+        if (parent.lives<0) {
+            parent.lives+=1
+            tank.destroy()
+            y_anim.start()
+            eagle1.state = "game over"
+        } else {
+            tank.x=192
+            tank.y=576
+            tank.rotation=0
+        }
+    }
+    signal checkOnWin()
+    onCheckOnWin: {
+        if ((win.enemies == 0) && (win.nCurrentEnemies == 0)) {
+            tank.focus=false
+            text1.text = "You win!"
+            y_anim.start()
+        }
+    }
 
+
+
+    //designer--------------------------------------------------------------
     Brick {
         id: brick1
         x: 48
@@ -1338,6 +1362,29 @@ Rectangle {
         y: 576
     }
 
+    Brick {
+        id: brick217
+        x: 0
+        y: 312
+    }
+
+    Brick {
+        id: brick218
+        x: 24
+        y: 312
+    }
+
+    Brick {
+        id: brick219
+        x: 576
+        y: 312
+    }
+
+    Brick {
+        id: brick220
+        x: 600
+        y: 312
+    }
 
 }
 

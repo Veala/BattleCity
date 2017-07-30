@@ -1,7 +1,6 @@
 import QtQuick 2.0
 
 Item {
-    id: tank
     width: 48
     height: 48
     focus: true
@@ -62,23 +61,23 @@ Item {
         interval: 20
         repeat: true
         function checkZone(chX,chY) {
-            if (window.contains(Qt.point(tank.x+chX,tank.y+chY)) == false) return false
-            if (window.childAt(tank.x+chX,tank.y+chY) != null) return false
+            if (window.contains(Qt.point(parent.x+chX,parent.y+chY)) == false) return false
+            if (window.childAt(parent.x+chX,parent.y+chY) != null) return false
             return true
         }
 
         onTriggered: {
             if (rotation == 0) {
-                if (checkZone(24, -4) == true) tank.y+=-4
+                if (checkZone(24, -4) == true) parent.y+=-4
             }
             else if (rotation == 180) {
-                if (checkZone(24, 52) == true) tank.y+=4
+                if (checkZone(24, 52) == true) parent.y+=4
             }
             else if (rotation == -90) {
-                if (checkZone(-4, 24) == true) tank.x+=-4
+                if (checkZone(-4, 24) == true) parent.x+=-4
             }
             else if (rotation == 90) {
-                if (checkZone(52, 24) == true) tank.x+=4
+                if (checkZone(52, 24) == true) parent.x+=4
             }
         }
     }
@@ -90,8 +89,8 @@ Item {
         else if (event.key == Qt.Key_Down) { rotation = 180; }
         else if (event.key == Qt.Key_Left) { rotation = -90; }
         else if (event.key == Qt.Key_Right) { rotation = 90; }
-        if ((rotation == 0) || (rotation == 180)) { nCell = tank.x/24 + 0.5; tank.x = nCell*24 }
-        else if ((rotation == 90) || (rotation == -90)) { nCell = tank.y/24 + 0.5; tank.y = nCell*24 }
+        if ((rotation == 0) || (rotation == 180)) { nCell = x/24 + 0.5; x = nCell*24 }
+        else if ((rotation == 90) || (rotation == -90)) { nCell = y/24 + 0.5; y = nCell*24 }
         if(timer.running == true) return;
         timer.start()
     }
@@ -105,7 +104,7 @@ Item {
         if (shoot == true) return;
         var bulletComponent = Qt.createComponent("Bullet.qml")
         if(bulletComponent.status == Component.Ready)
-            bullet = bulletComponent.createObject(window)
+            bullet = bulletComponent.createObject(this)
     }
 
 }

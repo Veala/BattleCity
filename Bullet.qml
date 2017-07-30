@@ -6,6 +6,7 @@ Rectangle {
     height: 10
     radius: 5
     property string name: "bullet"
+    property string bornFrom
     color: "gray"
 
     Timer {
@@ -15,12 +16,18 @@ Rectangle {
         property var childAtwindow
         function checkZone(chX,chY,dx,dy) {
             if (window.contains(Qt.point(bullet.x+chX,bullet.y+chY)) == false) {
-                tank.shoot = false; bullet.destroy(); return false;
+                if (bornFrom == "tank") tank.shoot = false;
+                bullet.destroy(); return false;
             }
             childAtwindow = window.childAt(bullet.x+chX,bullet.y+chY)
             if (childAtwindow != null) {
-                if (childAtwindow.name == "tank") childAtwindow.destroy()
-                else if (childAtwindow.name == "brick") {
+                if ((bornFrom == "tank") && (childAtwindow.name == "enemyTank")) {
+                    childAtwindow.destroy()
+                    win.enemies-=1; win.nCurrentEnemies-=1
+                    window.checkOnWin()
+                } else if ((bornFrom == "enemyTank") && (childAtwindow.name == "tank")) {
+                    window.hit()
+                } else if (childAtwindow.name == "brick") {
                     childAtwindow.destroy()
                     childAtwindow = window.childAt(bullet.x+chX+dx,bullet.y+chY+dy)
                     if (childAtwindow != null) {
@@ -31,7 +38,8 @@ Rectangle {
                 } else if (childAtwindow.name == "bullet") {
                     childAtwindow.destroy()
                 }
-                tank.shoot = false; bullet.destroy(); return false;
+                if (bornFrom == "tank") tank.shoot = false;
+                bullet.destroy(); return false;
             }
             return true
         }
@@ -48,21 +56,24 @@ Rectangle {
         }
     }
     Component.onCompleted: {
-        tank.shoot = true
-        rotation = tank.rotation
+        //parent == tank or enemyTank
+        bornFrom = parent.name
+        if (bornFrom == "tank") parent.shoot = true
+        rotation = parent.rotation
         if (rotation == 0) {
-            x = tank.x + tank.width/2 - width/2
-            y = tank.y
+            x = parent.x + parent.width/2 - width/2
+            y = parent.y
         } else if (rotation == 180) {
-            x = tank.x + tank.width/2 - width/2
-            y = tank.y + tank.height
+            x = parent.x + parent.width/2 - width/2
+            y = parent.y + parent.height
         } else if (rotation == -90) {
-            x = tank.x
-            y = tank.y + tank.height/2 - height/2
+            x = parent.x
+            y = parent.y + parent.height/2 - height/2
         } else if (rotation == 90) {
-            x = tank.x + tank.width
-            y = tank.y + tank.height/2 - height/2
+            x = parent.x + parent.width
+            y = parent.y + parent.height/2 - height/2
         }
+        parent = window
         timer.start()
     }
 }
